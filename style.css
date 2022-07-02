@@ -1,0 +1,119 @@
+/* CSS Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  /* footer support */
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--grey);
+  color: var(--black);
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  word-wrap: break-word;
+  /* footer support */
+  margin-bottom: 100px;
+}
+
+button,
+input {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+input[type='text'],
+input[type='number'] {
+  cursor: text;
+}
+
+/* Body */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+/* Header */
+
+header {
+  padding-top: 1rem;
+}
+
+/* Main */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+main #turn {
+  padding: 0;
+}
+
+main #score {
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+main #btn-container button {
+  border: 2px solid lightgray;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  color: lightgray;
+  background-color: black;
+  padding: 0.5em 1.5em;
+  margin-inline: 1em;
+  cursor: pointer;
+}
+
+main #btn-container button:hover {
+  background-color: #737373;
+}
+
+/* Board */
+
+main #board {
+  flex: 1;
+  display: grid;
+  grid-template: repeat(3, clamp(70px, 20vw, 120px)) / repeat(3, clamp(70px, 20vw, 120px));
+  align-items: stretch;
+  justify-content: center;
+  align-content: center;
+}
+
+#board .field {
+  border: none;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+}
+
+#board .no-r {
+  border-right: none;
+}
+
+#board .no-b {
+  border-bottom: none;
+}
+

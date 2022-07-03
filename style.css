@@ -15,9 +15,7 @@ html {
 }
 
 body {
-  background-color: var(--grey);
-  color: var(--black);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 500;
   word-wrap: break-word;
@@ -36,21 +34,23 @@ input {
   outline: none;
 }
 
-input[type='text'],
-input[type='number'] {
+input[type="text"],
+input[type="number"] {
   cursor: text;
 }
 
 /* Body */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: black;
   color: white;
   text-align: center;
+  overflow: hidden;
 }
 
 /* Header */
@@ -69,7 +69,9 @@ main {
 }
 
 main #turn {
-  padding: 0;
+  padding: 0 0 0.4em 0;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 main #score {
@@ -89,7 +91,7 @@ main #btn-container button {
 }
 
 main #btn-container button:hover {
-  background-color: #737373;
+  background-color: hsla(0, 0%, 100%, 0.2);
 }
 
 /* Board */
@@ -97,7 +99,9 @@ main #btn-container button:hover {
 main #board {
   flex: 1;
   display: grid;
-  grid-template: repeat(3, clamp(70px, 20vw, 120px)) / repeat(3, clamp(70px, 20vw, 120px));
+  grid-template:
+    repeat(3, clamp(70px, 20vw, 120px))
+    / repeat(3, clamp(70px, 20vw, 120px));
   align-items: stretch;
   justify-content: center;
   align-content: center;
@@ -116,4 +120,3 @@ main #board {
 #board .no-b {
   border-bottom: none;
 }
-

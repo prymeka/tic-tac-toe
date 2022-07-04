@@ -1,7 +1,9 @@
 :root {
   --player-border-color: hsla(0, 0%, 100%, 0.3);
   --player-text-color: hsla(0, 0%, 100%, 0.9);
+  --hover-color: hsla(0, 0%, 100%, 0.16);
   --border-radius: 5px;
+  --border: 2px solid white;
 }
 
 /* CSS Reset */
@@ -45,18 +47,6 @@ body {
   text-align: center;
 }
 
-#left-panel,
-#right-panel,
-#board-container,
-#board {
-  outline: 2px solid red;
-}
-
-#left-panel > div,
-#right-panel > div {
-  outline: 2px solid green;
-}
-
 /* Header */
 
 header {
@@ -85,15 +75,32 @@ main {
   grid-template: auto / 1fr;
   align-content: space-between;
   justify-content: center;
-}
-
-#right-panel {
-  align-content: space-around;
+  border: var(--border);
 }
 
 #left-panel > div,
 #right-panel > div {
   align-self: center;
+}
+
+/* Right Panel */
+
+#right-panel {
+  align-content: space-around;
+}
+
+.player-score-info {
+  font-size: 1.5rem;
+}
+
+#score {
+  font-size: 4rem;
+}
+
+/* Left Panel */
+
+#left-panel {
+  padding-top: 1em;
 }
 
 #reset-buttons-container {
@@ -128,7 +135,7 @@ select.player-type {
 #switch-button-container {
   font-size: small;
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
@@ -138,9 +145,74 @@ select.player-type {
   width: 2rem;
   aspect-ratio: 1;
   background-color: black;
-  cursor: pointer;
   border: 2px solid var(--player-border-color);
   border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#reset-buttons-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0 0.3em 0.3em;
+}
+
+#reset-buttons-container button {
+  flex: 1;
+  max-block-size: 90%;
+  height: auto;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border: 2px solid var(--player-border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  padding: 0.2em 0.4em;
+}
+
+select.player-type:hover,
+#switch-btn:hover,
+#reset-buttons-container button:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+/* Media Query Panels Layout */
+
+@media only screen and (max-width: 850px) {
+  #reset-buttons-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  main {
+    grid-template: 1fr 1fr / 1fr 1fr;
+  }
+
+  #board-container {
+    grid-column: 1 / 3;
+    grid-row-start: 1;
+  }
+
+  #left-panel,
+  #right-panel {
+    border: var(--border);
+    border-top: none;
+  }
+
+  #left-panel {
+    border-right: none;
+  }
+
+  #board-container {
+    border: var(--border);
+  }
 }
 
 /* Board */
@@ -151,6 +223,7 @@ select.player-type {
   grid-template: 1fr / 1fr;
   align-content: center;
   justify-content: center;
+  border-block: var(--border);
 }
 
 #board {
@@ -165,8 +238,8 @@ select.player-type {
 
 #board .field {
   border: none;
-  border-right: 2px solid white;
-  border-bottom: 2px solid white;
+  border-right: var(--border);
+  border-bottom: var(--border);
 }
 
 #board .no-r {

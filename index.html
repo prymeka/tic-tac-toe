@@ -17,27 +17,67 @@
       <h1>Tic Tac Toe</h1>
     </header>
     <main>
-      <div id="turn">
-        Turn: Player 1 (X)
+      <section id="left-panel">
+        <div class="player-options-container">
+          <div class="player-headline">Player 1</div>
+          <form class="player-options-form">
+            <input type="text" class="player-name" name="player-1-name" placeholder="Tom...">
+            <select class="player-type" name="Player">
+              <option value="user">User</option>
+              <option value="ai">AI (Easy)</option>
+              <option value="ai">AI (Medium)</option>
+              <option value="ai">AI (Hard)</option>
+              <option value="ai">AI (Unbeatable)</option>
+            </select>
+          </form>
+          <div class="symbol-container">Symbol: <span id="player-1-symbol">X</span></div>
+        </div>
+        <div id="switch-button-container">
+          <label for="switch-btn">Switch Symbols</label>
+          <button id="switch-btn">SS</button>
+        </div>
+        <div class="player-options-container">
+          <div class="player-headline">Player 2</div>
+          <form class="player-options-form">
+            <input type="text" class="player-name" name="player-1-name" placeholder="Jerry...">
+            <select class="player-type" name="Player">
+              <option value="user">User</option>
+              <option value="ai">AI (Easy)</option>
+              <option value="ai">AI (Medium)</option>
+              <option value="ai">AI (Hard)</option>
+              <option value="ai">AI (Unbeatable)</option>
+            </select>
+          </form>
+          <div class="symbol-container">Symbol: <span id="player-2-symbol">O</span></div>
+        </div>
+        <div id="reset-buttons-container">
+          <button>Undo</button>
+          <button>Reset Round</button>
+          <button>Reset Game</button>
+        </div>
+      </section>
+      <div id="board-container">
+        <div id="board">
+          <div id="0" class="field"></div>
+          <div id="1" class="field"></div>
+          <div id="2" class="field no-r"></div>
+          <div id="3" class="field"></div>
+          <div id="4" class="field"></div>
+          <div id="5" class="field no-r"></div>
+          <div id="6" class="field no-b"></div>
+          <div id="7" class="field no-b"></div>
+          <div id="8" class="field no-b no-r"></div>
+        </div>
       </div>
-      <div id="score">
-        0 - 0
-      </div>
-      <div id="board">
-        <div id="0" class="field"></div>
-        <div id="1" class="field"></div>
-        <div id="2" class="field no-r"></div>
-        <div id="3" class="field"></div>
-        <div id="4" class="field"></div>
-        <div id="5" class="field no-r"></div>
-        <div id="6" class="field no-b"></div>
-        <div id="7" class="field no-b"></div>
-        <div id="8" class="field no-b no-r"></div>
-      </div>
-      <div id="btn-container">
-        <button type="button">Reset Board</button>
-        <button type="button">Reset Game</button>
-      </div>
+      <section id="right-panel">
+        <div class="player-score-info">
+          Player 1 (X): Tom
+        </div>
+        <div id="score">0 - 0</div>
+        <div class="player-score-info">
+          Player 2 (O): Jerry
+        </div>
+      </section>
     </main>
 	</body>
 

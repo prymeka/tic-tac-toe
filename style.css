@@ -1,3 +1,9 @@
+:root {
+  --player-border-color: hsla(0, 0%, 100%, 0.3);
+  --player-text-color: hsla(0, 0%, 100%, 0.9);
+  --border-radius: 5px;
+}
+
 /* CSS Reset */
 
 *,
@@ -8,19 +14,10 @@
   margin: 0;
 }
 
-html {
-  /* footer support */
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 500;
   word-wrap: break-word;
-  /* footer support */
-  margin-bottom: 100px;
 }
 
 button,
@@ -34,74 +31,133 @@ input {
   outline: none;
 }
 
-input[type="text"],
-input[type="number"] {
-  cursor: text;
-}
-
-/* Body */
+/* Body and Main */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Ink Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: black;
   color: white;
   text-align: center;
-  overflow: hidden;
+}
+
+#left-panel,
+#right-panel,
+#board-container,
+#board {
+  outline: 2px solid red;
+}
+
+#left-panel > div,
+#right-panel > div {
+  outline: 2px solid green;
 }
 
 /* Header */
 
 header {
-  padding-top: 1rem;
+  padding-block: 0.7em;
 }
 
 /* Main */
 
 main {
   flex: 1;
+  display: grid;
+  grid-template: 1fr / 1fr 3fr 1fr;
+}
+
+#left-panel,
+#right-panel,
+#board {
+  flex: 1;
+}
+
+/* Side Panels */
+
+#left-panel,
+#right-panel {
+  display: grid;
+  grid-template: auto / 1fr;
+  align-content: space-between;
+  justify-content: center;
+}
+
+#right-panel {
+  align-content: space-around;
+}
+
+#left-panel > div,
+#right-panel > div {
+  align-self: center;
+}
+
+#reset-buttons-container {
+  align-self: flex-end;
+}
+
+.player-options-container,
+.player-options-container form {
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-main #turn {
-  padding: 0 0 0.4em 0;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-main #score {
-  font-size: 1.5rem;
-  padding: 0;
-}
-
-main #btn-container button {
-  border: 2px solid lightgray;
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-  color: lightgray;
+input.player-name {
+  width: 85%;
+  text-align: center;
   background-color: black;
-  padding: 0.5em 1.5em;
-  margin-inline: 1em;
-  cursor: pointer;
+  color: var(--player-text-color);
+  border-bottom: 2px solid var(--player-border-color);
 }
 
-main #btn-container button:hover {
-  background-color: hsla(0, 0%, 100%, 0.2);
+select.player-type {
+  width: 85%;
+  text-align: center;
+  background-color: black;
+  color: var(--player-text-color);
+  border-radius: var(--border-radius);
+}
+
+#switch-button-container {
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+#switch-btn {
+  width: 2rem;
+  aspect-ratio: 1;
+  background-color: black;
+  cursor: pointer;
+  border: 2px solid var(--player-border-color);
+  border-radius: var(--border-radius);
 }
 
 /* Board */
 
-main #board {
-  flex: 1;
+#board-container {
+  padding: 1em;
+  display: grid;
+  grid-template: 1fr / 1fr;
+  align-content: center;
+  justify-content: center;
+}
+
+#board {
   display: grid;
   grid-template:
-    repeat(3, clamp(70px, 20vw, 120px))
-    / repeat(3, clamp(70px, 20vw, 120px));
+    repeat(3, clamp(70px, 20vw, 150px))
+    / repeat(3, clamp(70px, 20vw, 150px));
   align-items: stretch;
   justify-content: center;
   align-content: center;

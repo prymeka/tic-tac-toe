@@ -1,17 +1,48 @@
-const Player = (name, symbol) => {
-    const getName = () => name;
-    const getSymbol = () => symbol;
+// Main
 
-    let fields = [];
-    const getFields = () => fields;
-    const pushToFields = value => {
-        if (fields.length === 0 || fields[fields.length-1] <= value) {
-            fields.push(value);
+function searchInsertIndex(array, target) {
+    if (array.indexOf(target) !== -1) {
+        return array.indexOf(target);
+    } else if (target > array[array.length-1]) {
+        return array.length;
+    } else if (target < array[0]) {
+        return 0;
+    } else {
+        left = 0
+        right = len(array) - 1
+        while (left <= right) {
+            mid = Math.floor((left+right)/2)
+            if (array[mid] === target) { 
+                return mid; 
+            } else if (array[mid] < target) {
+                left = mid+1;
+            } else {
+                right = mid-1;
+            }
         }
+        return left
+    }
+}
 
+const Player = (name, type, symbol) => {
+    const getName = () => name;
+    const setName = (newName) => name = newName;
+
+    const getSymbol = () => symbol;
+    const setSymbol = (newSymbol) => symbol = newSymbol;
+
+    let selections = [];
+    const getSelections = () => selections;
+    const addNewSelections = value => {
+        const index = searchInsertIndex(selection, value);
+        selections.splice(index, 0, value);
     };
 
-    return {getName, getSymbol, getFields, pushToFields};
+    return {
+        getName, setName, 
+        getSymbol, setSymbol, 
+        getSelections, addNewSelections
+    };
 }
 
 const Game = ((player1, player2) => {
@@ -46,3 +77,13 @@ const Game = ((player1, player2) => {
     boardFields.forEach(field => field.addEventListener("click", e => onSelection(e)));
 })();
 
+// Switch symbols button
+
+const player1Symbol = document.getElementById("player-1-symbol");
+const player2Symbol = document.getElementById("player-2-symbol");
+const switchButton = document.getElementById("switch-btn");
+switchButton.addEventListener("click", e => {
+    const temp = player1Symbol.textContent;
+    player1Symbol.textContent = player2Symbol.textContent;
+    player2Symbol.textContent = temp;
+});

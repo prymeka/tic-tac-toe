@@ -1,5 +1,3 @@
-// Main
-
 function searchInsertIndex(array, target) {
     if (array.indexOf(target) !== -1) {
         return array.indexOf(target);
@@ -25,6 +23,8 @@ function searchInsertIndex(array, target) {
 }
 
 const Player = (name, type, symbol) => {
+    const getType = () => type;
+    
     const getName = () => name;
     const setName = (newName) => name = newName;
 
@@ -39,6 +39,7 @@ const Player = (name, type, symbol) => {
     };
 
     return {
+        getType,
         getName, setName, 
         getSymbol, setSymbol, 
         getSelections, addNewSelections
@@ -61,8 +62,22 @@ const Game = ((player1, player2) => {
         [6, 7, 8]
     ];
     const checkForWin = selectedFields => {
-        if (selectedFields.length < 3) return false;
-
+        const numSelections = selectedFields.length;
+        if (numSelections < 3) return false;
+        // since selections are sorted we don't need to check the last two
+        for (const i=0; i<numSelections-2; i++) {
+            let selection = selectedFields[i];
+            for (const j=0; j<winningSelections.length; j++) {
+                // check if first element of any winning combination is present
+                if (selection !== winningSelections[j][0]) continue;
+                // if it is, check if the other two are too
+                if (selectedFields.includes(winningSelections[j][1]) && selectedFields.includes(winningSelections[j][2])) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
     };
 
     const onSelection = e => {
@@ -77,7 +92,6 @@ const Game = ((player1, player2) => {
     boardFields.forEach(field => field.addEventListener("click", e => onSelection(e)));
 })();
 
-// Switch symbols button
 
 const player1Symbol = document.getElementById("player-1-symbol");
 const player2Symbol = document.getElementById("player-2-symbol");

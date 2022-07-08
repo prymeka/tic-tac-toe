@@ -1,26 +1,3 @@
-function searchInsertIndex(array, target) {
-    if (array.indexOf(target) !== -1) {
-        return array.indexOf(target);
-    } else if (target > array[array.length-1]) {
-        return array.length;
-    } else if (target < array[0]) {
-        return 0;
-    } else {
-        left = 0
-        right = len(array) - 1
-        while (left <= right) {
-            mid = Math.floor((left+right)/2)
-            if (array[mid] === target) { 
-                return mid; 
-            } else if (array[mid] < target) {
-                left = mid+1;
-            } else {
-                right = mid-1;
-            }
-        }
-        return left
-    }
-}
 
 const Player = (name, type, symbol) => {
     const getType = () => type;
@@ -33,8 +10,33 @@ const Player = (name, type, symbol) => {
 
     let selections = [];
     const getSelections = () => selections;
+    
+    const _searchInsertIndex = function(array, target) {
+        if (array.indexOf(target) !== -1) {
+            return array.indexOf(target);
+        } else if (target > array[array.length-1]) {
+            return array.length;
+        } else if (target < array[0]) {
+            return 0;
+        } else {
+            left = 0
+            right = len(array) - 1
+            while (left <= right) {
+                mid = Math.floor((left+right)/2)
+                if (array[mid] === target) { 
+                    return mid; 
+                } else if (array[mid] < target) {
+                    left = mid+1;
+                } else {
+                    right = mid-1;
+                }
+            }
+            return left
+        }
+    }
+
     const addNewSelections = value => {
-        const index = searchInsertIndex(selection, value);
+        const index = _searchInsertIndex(selection, value);
         selections.splice(index, 0, value);
     };
 
@@ -49,7 +51,12 @@ const Player = (name, type, symbol) => {
 const Game = ((player1, player2) => {
     const players = [player1, player2]
     let currentTurn = 0;
-    const boardFields = document.querySelectorAll(".field");
+    
+    const initBoard = () => {
+        const boardFields = [];
+        for (const i=0; i<9; i++) boardFields.push(document.getElementById(`$i$`));
+        return boardFields;
+    };
 
     const winningSelections = [
         [0, 1, 2],
@@ -61,6 +68,7 @@ const Game = ((player1, player2) => {
         [3, 4, 5],
         [6, 7, 8]
     ];
+
     const checkForWin = selectedFields => {
         const numSelections = selectedFields.length;
         if (numSelections < 3) return false;

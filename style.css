@@ -126,6 +126,7 @@ input.player-name {
 
 select.player-type {
   width: 85%;
+  padding-block: 0.2em;
   text-align: center;
   background-color: black;
   color: var(--player-text-color);

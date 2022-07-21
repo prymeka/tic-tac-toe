@@ -2,6 +2,7 @@
   --player-border-color: hsla(0, 0%, 100%, 0.3);
   --player-text-color: hsla(0, 0%, 100%, 0.9);
   --hover-color: hsla(0, 0%, 100%, 0.16);
+  --active-color: hsla(0, 0%, 100%, 0.25);
   --border-radius: 5px;
   --border: 2px solid white;
 }
@@ -182,6 +183,13 @@ select.player-type:hover,
   cursor: pointer;
 }
 
+select.player-type:active,
+#switch-btn:active,
+#reset-buttons-container button:active {
+  background-color: var(--active-color);
+  cursor: pointer;
+}
+
 /* Media Query Panels Layout */
 
 @media only screen and (max-width: 850px) {
@@ -220,9 +228,9 @@ select.player-type:hover,
 
 #board-container {
   padding: 1em;
-  display: grid;
-  grid-template: 1fr / 1fr;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   border-block: var(--border);
 }
@@ -237,16 +245,44 @@ select.player-type:hover,
   align-content: center;
 }
 
-#board .field {
+.field {
   border: none;
   border-right: var(--border);
   border-bottom: var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+  font-weight: bold;
 }
 
-#board .no-r {
+.no-r {
   border-right: none;
 }
 
-#board .no-b {
+.no-b {
   border-bottom: none;
+}
+
+#next-btn {
+  visibility: hidden;
+  text-align: center;
+  color: black;
+  background-color: hsl(197, 98%, 65%);
+  width: 25%;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+#next-btn:hover {
+  background-color: hsl(197, 100%, 79%);
+}
+
+#next-btn:active {
+  background-color: hsl(198, 87%, 91%);
+}
+
+#winner-label {
+  color: white;
+  font-size: 1.5em;
 }

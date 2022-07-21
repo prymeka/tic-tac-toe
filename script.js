@@ -41,12 +41,14 @@ const Player = (name, symbol, type) => {
         _selections.splice(index, 0, parseInt(selection));
     };
     const resetSelections = () => _selections = [];
+    const removeLastSelection = () => _selections.pop();
     
     return {
         getName, setName,
         getSymbol, setSymbol,
         getType, setType,
-        getSelections, addNewSelection, resetSelections
+        getSelections, addNewSelection, 
+        resetSelections, removeLastSelection
     };
 };
 
@@ -133,11 +135,6 @@ const Game = (() => {
         initBoard();
     });
 
-    undoBtn.addEventListener("click", () => {
-        
-        currentTurn--;
-    });
-
     // add events to fields
     const onFieldClick = e => {
         if (e.currentTarget.textContent !== "") {
@@ -153,6 +150,18 @@ const Game = (() => {
             onWin(currentTurn);
         }
         currentTurn++;
+    };
+
+    const onUndoClick = () => {
+        if (currentTurn < 1) return;
+        currentTurn--;
+        let currentPlayer = players.getPlayer(1+currentTurn%2);
+        let selection = currentPlayer.getSelections();
+        let lastSelection = selection[selection.length-1];
+        let recentField = document.getElementById(String(lastSelection));
+        recentField.textContent = "";
+        recentField.addEventListener("click", onFieldClick, {"once": true})
+        currentPlayer.removeLastSelection();
     };
 
     const _winningSelections = [
@@ -204,6 +213,8 @@ const Game = (() => {
         score[currentTurn%2].textContent = String(currentPlayersScore+1);
         // remove event listeners from empty fields
         fields.forEach(f => f.removeEventListener("click", onFieldClick));
+        // remove event listener from undo button
+        undoBtn.removeEventListener("click", onUndoClick);
     };
 
     const initBoard = () => {
@@ -212,11 +223,15 @@ const Game = (() => {
             f.style.color = "white";
             f.addEventListener("click", onFieldClick, {"once": true});
         });
+        undoBtn.addEventListener("click", onUndoClick);
     };
 
     const resetGame = () => {
         nextBtn.style.visibility = "hidden";
         winnerLabel.textContent = "";
+        players.resetSelections();
+        currentTurn = 0;
+        score.forEach(s => s.textContent = "0");
         initBoard();
     };
 

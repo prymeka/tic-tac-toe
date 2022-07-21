@@ -164,6 +164,12 @@ const Game = (() => {
         currentPlayer.removeLastSelection();
     };
 
+    const onResetRoundClick = () => {
+        players.resetSelections();
+        currentTurn = 0;
+        initBoard();
+    };
+
     const _winningSelections = [
         [0, 1, 2],
         [0, 3, 6],
@@ -213,8 +219,10 @@ const Game = (() => {
         score[currentTurn%2].textContent = String(currentPlayersScore+1);
         // remove event listeners from empty fields
         fields.forEach(f => f.removeEventListener("click", onFieldClick));
-        // remove event listener from undo button
+        // remove event listener from undo and reset buttons
         undoBtn.removeEventListener("click", onUndoClick);
+        resetGameBtn.removeEventListener("click", resetGame);
+        resetRoundBtn.removeEventListener("click", onResetRoundClick);
     };
 
     const initBoard = () => {
@@ -224,6 +232,8 @@ const Game = (() => {
             f.addEventListener("click", onFieldClick, {"once": true});
         });
         undoBtn.addEventListener("click", onUndoClick);
+        resetGameBtn.addEventListener("click", resetGame);
+        resetRoundBtn.addEventListener("click", onResetRoundClick);
     };
 
     const resetGame = () => {

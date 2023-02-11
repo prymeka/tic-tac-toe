@@ -141,13 +141,7 @@ const Gameboard = () => {
     return false;
   };
 
-  const checkForDraw = currentTurn => {
-    if (currentTurn < 9) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+  const checkForDraw = currentTurn => currentTurn > 7;
 
   const reset = () => {
     _selectionsX = [];
